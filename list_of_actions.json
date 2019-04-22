@@ -1,0 +1,22 @@
+{
+"time series histogram":
+	["symbol", "start_date", "end_date", "metric", "bins"]
+	,
+"time series gaussian":
+	["symbol", "start_date", "end_date", "metric"]
+	,
+"colormesh beta relationship":
+	["symbol_one", "symbol_two", "start_date", "end_date", "days_scope", "bins"]
+	,
+"beta relationship distribution slice":
+	["symbol_one", "symbol_two", "percent_change", "start_date", "end_date", "days_scope", "bins"]
+	,
+"traditional beta relationship":
+	["symbol_one", "symbol_two", "start_date", "end_date", "days_scope", "linear_regress"]
+	,
+"simple time series":
+	["symbol", "start_date", "end_date", "metric", "linear_regress"]
+	,
+"series of gaussian probability of divergence from linear regression":
+	["symbol_one", "symbol_two", "start_date", "end_date", "days_scope"]
+}

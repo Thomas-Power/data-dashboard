@@ -1,0 +1,129 @@
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="app.js"></script>
+	</head>
+	<style>
+		.tooltip {
+		  position: relative;
+		  display: inline-block;
+		  border-bottom: 1px dotted black;
+		}
+
+		.tooltip .tooltiptext {
+		  visibility: hidden;
+		  width: 120px;
+		  background-color: #555;
+		  color: #fff;
+		  text-align: center;
+		  border-radius: 6px;
+		  padding: 5px 0;
+		  position: absolute;
+		  z-index: 1;
+		  bottom: 125%;
+		  left: 50%;
+		  margin-left: -60px;
+		  opacity: 0;
+		  transition: opacity 0.3s;
+		}
+
+		.tooltip .tooltiptext::after {
+		  content: "";
+		  position: absolute;
+		  top: 100%;
+		  left: 50%;
+		  margin-left: -5px;
+		  border-width: 5px;
+		  border-style: solid;
+		  border-color: #555 transparent transparent transparent;
+		}
+
+		.tooltip:hover .tooltiptext {
+		  visibility: visible;
+		  opacity: 1;
+		}
+	</style>
+
+	<body ng-app="app1">
+		<div>
+			<img src="static/header.png">
+		</div>	
+		<div id="home_page" ng-controller="ctrl_home">
+			<button ng-click="enterApp()" type="button">Enter App</button>
+		</div>
+		
+		<div id="generate_page" ng-controller="ctrl_generate"  style="display: none;">
+			<h4>Edit Graph</h4><br>
+			<button ng-click="goBack()" type="button">Back</button>
+			<span>Select action:</span>
+			<select ng-model="action_select" ng-options="action for action in actions" ng-change="showOptions()"></select><br>
+			
+			<div id="main_options">
+				<h4>Options:</h4><br>
+				<div id="symbol_option" class="option" style="display: none;">
+					<p class="tooltip">
+						Symbol:<span class="tooltiptext">The stock market symbol for a commodity</span>
+					</p>
+					<input ng-model="symbol" type="text">
+				</div>
+				<div id="symbol_one_option" class="option" style="display: none;">
+					<p class="tooltip">
+						Symbol one:<span class="tooltiptext">The stock market symbol for a commodity</span>
+					</p>
+					<input ng-model="symbol_one" type="text">
+				</div>
+				<div id="symbol_two_option" class="option" style="display: none;">
+					<p class="tooltip">
+						Symbol two:<span class="tooltiptext">Another stock market symbol, used to relate values</span>
+					</p>
+					<input ng-model="symbol_two" type="text">
+				</div>
+				<div id="start_date_option" class="option" style="display: none;">
+					<p class="tooltip">
+						Start date:<span class="tooltiptext">The starting date of the series</span>
+					</p>
+					<input ng-model="start_date" type="text">
+				</div>
+				<div id="end_date_option" class="option" style="display: none;">
+					<p class="tooltip">
+						End date (Optional):<span class="tooltiptext">The end date of the series. Defaults to present date</span>
+					</p>
+					<input ng-model="end_date" type="text">
+				</div>
+			</div>
+			
+			<div id="advanced_options"> 
+				<h4>Advanced options (Optional):</h4><br>
+				<div id="bins_option" class="option" style="display: none;">
+					<p class="tooltip">
+						Bins:<span class="tooltiptext">The amount of divisions of data, higher values are more precise but take longer to process</span>
+					</p>
+					<input ng-model="bins" type="text">
+				</div>
+				<div id="days_scope_option" class="option" style="display: none;">
+					<p class="tooltip">
+						Days scope:<span class="tooltiptext">The amount of days represented by each value point</span>
+					</p>
+					<input ng-model="days_scope" type="text">
+				</div>
+				<div id="linear_regress_option" class="option" style="display: none;">
+					<p class="tooltip">
+						Linear regress:<span class="tooltiptext">Display a linear regression over data</span>
+					</p>
+					<input ng-model="linear_regress" type="checkbox">
+				</div>
+			</div>
+			<button ng-click="generateData()" type="button">Generate Data</button>
+			<button ng-click="deleteGraph()" type="button">Delete Graph</button>
+			<br>
+		</div>
+		<div id="display_page" ng-controller="ctrl_display"  style="display: none;">
+			Enter stock market ticker: <input ng-model="ticker_name" type="text"></br>
+			<button  ng-click="loadData()" type="button">Load data</button>
+			<div id="graphs">
+				<img id="add_new" ng-click="newGraph()" onmouseout="this.src = 'static/add_new.png'" onmouseover="this.src = 'static/add_new_highlighted.png'" src="static/add_new.png" style="display: none;">
+			</div>
+		</div>
+	</body>
+</html>
