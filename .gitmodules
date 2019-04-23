@@ -1,0 +1,3 @@
+[submodule "flaskapp"]
+	path = flaskapp
+	url = https://github.com/Thomas-Power/flaskapp
