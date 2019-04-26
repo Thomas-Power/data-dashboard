@@ -91,6 +91,12 @@
 					</p>
 					<input ng-model="end_date" type="text">
 				</div>
+				<div id="percent_change_option" class="option" style="display: none;">
+					<p class="tooltip">
+						Percent change:<span class="tooltiptext">The change in value for symbol one</span>
+					</p>
+					<input ng-model="percent_change" type="text">
+				</div>
 			</div>
 			
 			<div id="advanced_options"> 
@@ -113,14 +119,26 @@
 					</p>
 					<input ng-model="linear_regress" type="checkbox">
 				</div>
+				<div id="short_option" class="option" style="display: none;">
+					<p class="tooltip">
+						Short:<span class="tooltiptext">Display value of shorting investment</span>
+					</p>
+					<input ng-model="shorting" type="checkbox">
+				</div>
+				<div id="leveredge_option" class="option" style="display: none;">
+					<p class="tooltip">
+						Leveredge:<span class="tooltiptext">Apply factor of leveredge</span>
+					</p>
+					<input ng-model="leveredge" type="text">
+				</div>
 			</div>
 			<button ng-click="generateData()" type="button">Generate Data</button>
-			<button ng-click="deleteGraph()" type="button">Delete Graph</button>
+			<button ng-click="deleteGraph()" type="button">Delete Graph</button>{{Request_Status}}
 			<br>
 		</div>
 		<div id="display_page" ng-controller="ctrl_display"  style="display: none;">
 			Enter stock market ticker: <input ng-model="ticker_name" type="text"></br>
-			<button  ng-click="loadData()" type="button">Load data</button>
+			<button  ng-click="loadData()" type="button">Load data</button> {{Request_Status}}
 			<div id="graphs">
 				<img id="add_new" ng-click="newGraph()" onmouseout="this.src = 'static/add_new.png'" onmouseover="this.src = 'static/add_new_highlighted.png'" src="static/add_new.png" style="display: none;">
 			</div>

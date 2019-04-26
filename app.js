@@ -17,6 +17,7 @@ app1.controller("ctrl_home", function($scope){
 
 app1.controller("ctrl_display", ['$scope', '$compile', function ($scope, $compile){
 	$scope.loadData = function(){
+		$scope.Request_Status = "gathering data..." 
 		cur_ticker = $scope.ticker_name;
 		$.ajax({
 			type: "GET",
@@ -31,6 +32,7 @@ app1.controller("ctrl_display", ['$scope', '$compile', function ($scope, $compil
 			for (let id_number of id_numbers){
 				$("#graphs").prepend($compile(make_graph(id_number))($scope));
 			}
+			$scope.Request_Status = "" 
 			$scope.$apply();
 		});
 	};
@@ -90,6 +92,7 @@ app1.controller("ctrl_generate", ['$scope', '$compile', function($scope, $compil
 	};
 	
 	$scope.generateData = function(){
+		$scope.Request_Status = "gathering data..." 
 		$.ajax({
 			type: "GET",
 			url: "http://localhost:5000/create_graph",
@@ -104,7 +107,9 @@ app1.controller("ctrl_generate", ['$scope', '$compile', function($scope, $compil
 				"bins":$scope.bins,
 				"days_scope":$scope.days_scope,
 				"linear_regress":$scope.linear_regress,
-				"id_number":target_id
+				"id_number":target_id,
+				"short":$scope.shorting,
+				"leveredge":$scope.leveredge
 			}
 		}).then( function(result){
 			if(target_id === "new"){
@@ -114,6 +119,7 @@ app1.controller("ctrl_generate", ['$scope', '$compile', function($scope, $compil
 				$("#" + result).attr("src", "static/" + result + ".png?_ts=" + new Date().getTime());
 			}
 			$scope.$emit('refresh_data');
+			$scope.Request_Status = "" 
 			$scope.goBack();
 		});
 	};
